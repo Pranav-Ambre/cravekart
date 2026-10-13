@@ -50,6 +50,18 @@ if (env.NODE_ENV !== 'test') {
 
 app.use(generalLimiter);
 
+// Root welcome endpoint
+app.get('/', (req: Request, res: Response) => {
+  res.json({
+    success: true,
+    message: 'Welcome to CraveKart API! Server is running smoothly.',
+    version: '1.0.0',
+    status: 'online',
+    healthCheck: '/health',
+    apiRoot: '/api',
+  });
+});
+
 // Health check endpoint
 app.get('/health', async (req: Request, res: Response) => {
   try {
