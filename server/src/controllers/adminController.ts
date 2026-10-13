@@ -165,7 +165,7 @@ export async function updateOrderStatus(
     if (status === 'DELIVERED') {
       updateData.paymentStatus = 'PAID'; // If COD, mark paid upon delivery
     } else if (status === 'CANCELLED') {
-      updateData.paymentStatus = order.paymentStatus === 'PAID' ? 'REFUNDED' : 'FAILED';
+      updateData.paymentStatus = ((order.paymentStatus as any) === 'PAID' || (order.paymentStatus as any) === 'SUCCESS') ? 'REFUNDED' : 'FAILED';
     }
 
     const updated = await prisma.$transaction([
@@ -176,7 +176,7 @@ export async function updateOrderStatus(
       prisma.orderStatusHistory.create({
         data: {
           orderId: id,
-          status,
+          status: status as any,
           note: note || `Status updated to ${status} by Admin`,
           changedByUserId: req.user?.id,
         },

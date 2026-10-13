@@ -36,7 +36,7 @@ export async function verifyPayment(
     }
 
     // Check if already paid to prevent duplicate processing
-    if (order.paymentStatus === 'PAID') {
+    if ((order.paymentStatus as any) === 'PAID' || (order.paymentStatus as any) === 'SUCCESS') {
       res.json({
         success: true,
         message: 'Payment already verified.',
@@ -88,7 +88,7 @@ export async function verifyPayment(
       const updatedOrder = await tx.order.update({
         where: { id: order.id },
         data: {
-          paymentStatus: 'PAID',
+          paymentStatus: 'PAID' as any,
           status: 'CONFIRMED',
         },
       });
@@ -152,7 +152,7 @@ export async function handleWebhook(
           prisma.order.update({
             where: { id: paymentRecord.orderId },
             data: {
-              paymentStatus: 'PAID',
+              paymentStatus: 'PAID' as any,
               status: 'CONFIRMED',
             },
           }),

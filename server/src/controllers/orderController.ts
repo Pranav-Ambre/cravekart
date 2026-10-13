@@ -446,7 +446,7 @@ export async function cancelOrder(
         data: {
           status: 'CANCELLED',
           cancellationReason: reason || 'Cancelled by customer',
-          paymentStatus: order.paymentStatus === 'PAID' ? 'REFUNDED' : 'FAILED',
+          paymentStatus: ((order.paymentStatus as any) === 'PAID' || (order.paymentStatus as any) === 'SUCCESS') ? 'REFUNDED' : 'FAILED',
         },
       }),
       prisma.orderStatusHistory.create({
