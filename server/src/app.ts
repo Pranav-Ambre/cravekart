@@ -103,7 +103,7 @@ app.get('/api', (req: Request, res: Response) => {
   });
 });
 
-// API Routes
+// API Routes (Mounted under both /api/* and /* for maximum client baseURL compatibility)
 app.use('/api/auth', authRoutes);
 app.use('/api/restaurants', restaurantRoutes);
 app.use('/api/foods', foodRoutes);
@@ -112,6 +112,16 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/admin', adminRoutes);
+
+// Direct root route mappings
+app.use('/auth', authRoutes);
+app.use('/restaurants', restaurantRoutes);
+app.use('/foods', foodRoutes);
+app.use('/coupons', couponRoutes);
+app.use('/orders', orderRoutes);
+app.use('/payments', paymentRoutes);
+app.use('/users', userRoutes);
+app.use('/admin', adminRoutes);
 
 // 404 Handler
 app.use((req: Request, res: Response) => {
