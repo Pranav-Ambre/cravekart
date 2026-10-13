@@ -1,0 +1,31 @@
+{
+  "name": "cravekart-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CraveKart - Premium Online Food Ordering Platform",
+  "scripts": {
+    "dev": "npm run dev --prefix server & npm run dev --prefix client",
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "build": "npm run build --prefix server && npm run build --prefix client",
+    "build:server": "npm run build --prefix server",
+    "build:client": "npm run build --prefix client",
+    "test": "npm run test --prefix server && npm run test --prefix client",
+    "test:server": "npm run test --prefix server",
+    "test:client": "npm run test --prefix client",
+    "seed": "npm run db:seed --prefix server",
+    "setup": "cd server && npm install && npx prisma generate && cd ../client && npm install"
+  },
+  "keywords": [
+    "food-ordering",
+    "restaurant",
+    "delivery",
+    "cravekart",
+    "react",
+    "express",
+    "prisma",
+    "postgresql"
+  ],
+  "author": "CraveKart Team",
+  "license": "MIT"
+}
